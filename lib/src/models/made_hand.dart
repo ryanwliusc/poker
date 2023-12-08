@@ -59,12 +59,12 @@ enum MadeHandType {
   straightFlush
 }
 
-Suit? _findFlushSuit(ImmutableCardSet cards) {
+Suits? _findFlushSuit(ImmutableCardSet cards) {
   final suitCount = {
-    Suit.spade: 0,
-    Suit.heart: 0,
-    Suit.diamond: 0,
-    Suit.club: 0,
+    Suits.spade: 0,
+    Suits.heart: 0,
+    Suits.diamond: 0,
+    Suits.club: 0,
   };
 
   for (final card in cards) {
@@ -78,7 +78,7 @@ Suit? _findFlushSuit(ImmutableCardSet cards) {
   return null;
 }
 
-int _hashForFlush({required ImmutableCardSet cards, required Suit suit}) {
+int _hashForFlush({required ImmutableCardSet cards, required Suits suit}) {
   const bitEachRank = {
     Rank.ace: 0x1000,
     Rank.deuce: 0x1,

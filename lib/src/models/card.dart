@@ -42,7 +42,7 @@ abstract class Card {
   /// final TreyOfDiamond = Card(rank: Rank.trey, suit: Suit.diamond);
   /// final kingOfClub = Card(rank: Rank.king, suit: Suit.club);
   /// ```
-  const factory Card(Rank rank, Suit suit) = _RankSuitBasedCard;
+  const factory Card(Rank rank, Suits suit) = _RankSuitBasedCard;
 
   /// Creates a [Card] from a hash int value.
   @protected
@@ -61,7 +61,7 @@ abstract class Card {
       throw CardParseFailure(value);
     }
 
-    return _RankSuitBasedCard(Rank.parse(value[0]), Suit.parse(value[1]));
+    return _RankSuitBasedCard(Rank.parse(value[0]), Suits.parse(value[1]));
   }
 
   /// Returns the hash integer value of this card.
@@ -71,7 +71,7 @@ abstract class Card {
   Rank get rank;
 
   /// The [Suit] of this card.
-  Suit get suit;
+  Suits get suit;
 
   /// Returns a string representation. Ace of spade is `"As"`, 10 of heart is `"Th"` and deuce of diamond is `"2d"`.
   @override
@@ -89,8 +89,8 @@ class _IndexBasedCard implements Card {
   Rank get rank => Rank.fromIndex((math.log(index) / math.log(2)).floor() % 13);
 
   @override
-  Suit get suit =>
-      Suit.fromIndex(((math.log(index) / math.log(2)) / 13).floor());
+  Suits get suit =>
+      Suits.fromIndex(((math.log(index) / math.log(2)) / 13).floor());
 
   @override
   String toString() => '$rank$suit';
@@ -113,7 +113,7 @@ class _RankSuitBasedCard implements Card {
   final Rank rank;
 
   @override
-  final Suit suit;
+  final Suits suit;
 
   @override
   String toString() => '$rank$suit';

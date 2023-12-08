@@ -426,28 +426,28 @@ class RankPair with IterableMixin<CardPair> {
     if (high == kicker) {
       return {
         CardPair(
-          Card(kicker, Suit.spade),
-          Card(kicker, Suit.heart),
+          Card(kicker, Suits.spade),
+          Card(kicker, Suits.heart),
         ),
         CardPair(
-          Card(kicker, Suit.spade),
-          Card(kicker, Suit.diamond),
+          Card(kicker, Suits.spade),
+          Card(kicker, Suits.diamond),
         ),
         CardPair(
-          Card(kicker, Suit.spade),
-          Card(kicker, Suit.club),
+          Card(kicker, Suits.spade),
+          Card(kicker, Suits.club),
         ),
         CardPair(
-          Card(kicker, Suit.heart),
-          Card(kicker, Suit.diamond),
+          Card(kicker, Suits.heart),
+          Card(kicker, Suits.diamond),
         ),
         CardPair(
-          Card(kicker, Suit.heart),
-          Card(kicker, Suit.club),
+          Card(kicker, Suits.heart),
+          Card(kicker, Suits.club),
         ),
         CardPair(
-          Card(kicker, Suit.diamond),
-          Card(kicker, Suit.club),
+          Card(kicker, Suits.diamond),
+          Card(kicker, Suits.club),
         ),
       };
     }
@@ -522,9 +522,9 @@ const List<Rank> _ranks = [
   Rank.deuce,
 ];
 
-const List<Suit> _suits = [
-  Suit.spade,
-  Suit.heart,
-  Suit.diamond,
-  Suit.club,
+const List<Suits> _suits = [
+  Suits.spade,
+  Suits.heart,
+  Suits.diamond,
+  Suits.club,
 ];

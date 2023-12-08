@@ -1,23 +1,23 @@
 /// An enum that expresses a suit of [Card].
-enum Suit {
+enum Suits {
   spade,
   heart,
   diamond,
   club;
 
   /// Returns a [Suit] from an integer value. The value must be 0 <= value <= 3.
-  factory Suit.fromIndex(int index) {
+  factory Suits.fromIndex(int index) {
     assert(index >= 0 && index <= 3);
 
     switch (index) {
       case 0:
-        return Suit.spade;
+        return Suits.spade;
       case 1:
-        return Suit.heart;
+        return Suits.heart;
       case 2:
-        return Suit.diamond;
+        return Suits.diamond;
       default:
-        return Suit.club;
+        return Suits.club;
     }
   }
 
@@ -34,16 +34,16 @@ enum Suit {
   /// Suit.parse("sc");  // throws SuitParseFailureException
   /// Suit.parse("S");   // throws SuitParseFailureException
   /// ```
-  factory Suit.parse(String value) {
+  factory Suits.parse(String value) {
     switch (value) {
       case 's':
-        return Suit.spade;
+        return Suits.spade;
       case 'h':
-        return Suit.heart;
+        return Suits.heart;
       case 'd':
-        return Suit.diamond;
+        return Suits.diamond;
       case 'c':
-        return Suit.club;
+        return Suits.club;
       default:
         throw SuitParseFailureException(value: value);
     }
@@ -58,11 +58,11 @@ enum Suit {
   @override
   String toString() {
     switch (this) {
-      case Suit.spade:
+      case Suits.spade:
         return 's';
-      case Suit.heart:
+      case Suits.heart:
         return 'h';
-      case Suit.diamond:
+      case Suits.diamond:
         return 'd';
       default:
         return 'c';

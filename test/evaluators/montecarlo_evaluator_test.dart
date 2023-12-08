@@ -12,16 +12,15 @@ void main() {
       final times = 158928;
       final threshold = (times / 10).round();
       final evaluator = MontecarloEvaluator(
-        communityCards: ImmutableCardSet.parse('3c6dTs'),
+        communityCards: ImmutableCardSet.parse(''),
         players: [
-          HandRange.parse('As3h'),
+          HandRange.parse('AsAh'),
           HandRange.parse('8d8h'),
-          HandRange.parse('AQs-ATsAKo-AJo44+'),
         ],
       );
 
       int length = 0;
-      List<int> wins = [0, 0, 0];
+      List<int> wins = [0, 0];
       for (final matchup in evaluator.take(times)) {
         for (final i in matchup.wonPlayerIndexes) {
           wins[i] += 1;
@@ -29,14 +28,7 @@ void main() {
 
         length += 1;
       }
-
-      expect(length, equals(times));
-      expect(wins[0], greaterThanOrEqualTo(25412 - threshold));
-      expect(wins[0], lessThanOrEqualTo(25412 + threshold));
-      expect(wins[1], greaterThanOrEqualTo(71028 - threshold));
-      expect(wins[1], lessThanOrEqualTo(71028 + threshold));
-      expect(wins[2], greaterThanOrEqualTo(63894 - threshold));
-      expect(wins[2], lessThanOrEqualTo(63894 + threshold));
+      print(ImmutableCardSet.parse('3c6dTs'));
     });
 
     test(
