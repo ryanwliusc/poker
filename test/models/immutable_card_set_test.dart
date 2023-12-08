@@ -27,10 +27,10 @@ void main() {
         expect(
           ImmutableCardSet.parse('AsKcQhJd'),
           equals(ImmutableCardSet.of({
-            Card(Rank.ace, Suit.spade),
-            Card(Rank.queen, Suit.heart),
-            Card(Rank.jack, Suit.diamond),
-            Card(Rank.king, Suit.club),
+            Card(Rank.ace, Suits.spade),
+            Card(Rank.queen, Suits.heart),
+            Card(Rank.jack, Suits.diamond),
+            Card(Rank.king, Suits.club),
           })),
         );
       });
@@ -91,10 +91,10 @@ void main() {
       test('ImmutableCardSet<{ As, Qh, Jd, Kc }>.length returns 4', () {
         expect(
           ImmutableCardSet.of({
-            Card(Rank.ace, Suit.spade),
-            Card(Rank.queen, Suit.heart),
-            Card(Rank.jack, Suit.diamond),
-            Card(Rank.king, Suit.club),
+            Card(Rank.ace, Suits.spade),
+            Card(Rank.queen, Suits.heart),
+            Card(Rank.jack, Suits.diamond),
+            Card(Rank.king, Suits.club),
           }).length,
           equals(4),
         );
@@ -102,7 +102,7 @@ void main() {
 
       test('ImmutableCardSet<{ As }>.length returns 1', () {
         expect(
-          ImmutableCardSet.of({Card(Rank.ace, Suit.spade)}).length,
+          ImmutableCardSet.of({Card(Rank.ace, Suits.spade)}).length,
           equals(1),
         );
       });
@@ -120,11 +120,11 @@ void main() {
       test('ImmutableCardSet<AsQhJdKh>.contains(Card<Jd>) returns true', () {
         expect(
           ImmutableCardSet.of({
-            Card(Rank.ace, Suit.spade),
-            Card(Rank.queen, Suit.heart),
-            Card(Rank.jack, Suit.diamond),
-            Card(Rank.king, Suit.club),
-          }).contains(Card(Rank.jack, Suit.diamond)),
+            Card(Rank.ace, Suits.spade),
+            Card(Rank.queen, Suits.heart),
+            Card(Rank.jack, Suits.diamond),
+            Card(Rank.king, Suits.club),
+          }).contains(Card(Rank.jack, Suits.diamond)),
           isTrue,
         );
       });
@@ -132,7 +132,7 @@ void main() {
       test(
           'ImmutableCardSet.empty().contains(ImmutableCardSet<2c>) returns false',
           () {
-        expect(ImmutableCardSet.empty().contains(Card(Rank.deuce, Suit.club)),
+        expect(ImmutableCardSet.empty().contains(Card(Rank.deuce, Suits.club)),
             isFalse);
       });
     });
@@ -142,7 +142,7 @@ void main() {
           'ImmutableCardSet<2c>.containsAll(ImmutableCardSet.empty()) returns true',
           () {
         expect(
-          ImmutableCardSet.of({Card(Rank.deuce, Suit.club)})
+          ImmutableCardSet.of({Card(Rank.deuce, Suits.club)})
               .containsAll(ImmutableCardSet.empty()),
           isTrue,
         );

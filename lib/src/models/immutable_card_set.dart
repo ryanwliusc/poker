@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:fixnum/fixnum.dart';
 import 'package:bitcount/bitcount.dart';
 import 'package:meta/meta.dart';
 import './card.dart';
@@ -27,20 +28,20 @@ class ImmutableCardSet with IterableMixin<Card> {
   const ImmutableCardSet._(this._indexUnion);
 
   /// An empty ImmutableCardSet.
-  const ImmutableCardSet.empty() : _indexUnion = 0;
+  const ImmutableCardSet.empty() : _indexUnion = Int64.ZERO;
 
   /// A full-deck ImmutableCardSet.
-  const ImmutableCardSet.full() : _indexUnion = 4503599627370495;
+  const ImmutableCardSet.full() : _indexUnion = Int64.MAX_VALUE;
 
   /// Creates a ImmutableCardSet from a `Iterable<Card>`.
   ImmutableCardSet.of(Iterable<Card> cards)
-      : _indexUnion = cards.fold<int>(0, (s, card) => s | card.index);
+      : _indexUnion = cards.fold<Int64>(Int64.ZERO, (s, card) => s | card.index);
 
   /// Parses a [String] to create a ImmutableCardSet.
   ///
   /// This method expects a String sequence of a String for [Card.parse()].
   factory ImmutableCardSet.parse(String value) {
-    int indexUnion = 0;
+    Int64 indexUnion = Int64.ZERO;
 
     for (int i = 0; i < value.length; i += 2) {
       try {
@@ -53,10 +54,10 @@ class ImmutableCardSet with IterableMixin<Card> {
     return ImmutableCardSet._(indexUnion);
   }
 
-  final int _indexUnion;
+  final Int64 _indexUnion;
 
   @override
-  int get length => _indexUnion.bitCount();
+  int get length => _indexUnion.toInt().bitCount();
 
   @override
   bool contains(Object? element) {
@@ -90,7 +91,7 @@ class ImmutableCardSet with IterableMixin<Card> {
   Iterator<Card> get iterator => _CardSetIterator(_indexUnion);
 
   @override
-  int get hashCode => _indexUnion;
+  int get hashCode => _indexUnion.hashCode;
 
   @override
   operator ==(Object other) =>
@@ -102,7 +103,7 @@ class ImmutableCardSet with IterableMixin<Card> {
 class _CardSetIterator implements Iterator<Card> {
   _CardSetIterator(this._remaining) : _current = null;
 
-  int _remaining;
+  Int64 _remaining;
 
   Card? _current;
 
@@ -111,9 +112,9 @@ class _CardSetIterator implements Iterator<Card> {
 
   @override
   bool moveNext() {
-    if (_remaining > 0) {
-      _current = Card.fromIndex(_remaining & -_remaining);
-      _remaining = _remaining & (_remaining - 1);
+    if (_remaining > Int64.ZERO) {
+      _current = Card.fromIndex((_remaining & -_remaining).toInt());
+      _remaining = _remaining & (_remaining - Int64.ONE);
 
       return true;
     }
@@ -153,10 +154,10 @@ class CardPair with IterableMixin<Card> implements ImmutableCardSet {
   final Card b;
 
   @override
-  int get _indexUnion => a.index | b.index;
+  Int64 get _indexUnion => Int64(a.index) | Int64(b.index);
 
   @override
-  int get length => _indexUnion.bitCount();
+  int get length => _indexUnion.toInt().bitCount();
 
   @override
   bool contains(Object? element) {
@@ -212,7 +213,7 @@ class CardPair with IterableMixin<Card> implements ImmutableCardSet {
   Iterator<Card> get iterator => _CardSetIterator(_indexUnion);
 
   @override
-  int get hashCode => _indexUnion;
+  int get hashCode => _indexUnion.hashCode;
 
   @override
   operator ==(Object other) =>
